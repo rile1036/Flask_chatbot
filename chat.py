@@ -1,17 +1,17 @@
 import os
 from flask import Flask, request, jsonify
+import json
 
 app = Flask(__name__)
 
 @app.route('/keyboard')
 def Keyboard():
-	dataSend = {
+	return jsonify ({
 		"type" : "buttons",
 		"buttons" : ["인사말", "버전"]
-	}
-	return jsonify(dataSend)
+	})
 
-@app.route('/message', methods = ['POST'])
+@app.route('/message', methods = ["POST"])
 def Message():
 	dataReceive = request.get_json()
 	content = dataReceive['content']
@@ -32,4 +32,4 @@ def Message():
 	return jsonify(dataSend)
 
 if __name__ == "__main__":
-	app.run(host = '172.31.40.197', port = 5050, debug = True)
+	app.run(host = '0.0.0.0', port = 80)
